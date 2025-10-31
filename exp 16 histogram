@@ -1,0 +1,51 @@
+import matplotlib.pyplot as plt 
+import numpy as np 
+ 
+# Step 1: Sample dataset 
+# Example: 4 instances with 2 attributes (Height in cm, Weight in kg) 
+data = np.array([ 
+    [160, 55], 
+    [170, 65], 
+    [165, 60], 
+    [180, 75] 
+]) 
+ 
+heights = data[:, 0]  # Attribute 1 
+weights = data[:, 1]  # Attribute 2 
+names = ['A', 'B', 'C', 'D']  # Instance names 
+ 
+#  Histogram 
+plt.figure(figsize=(6,4)) 
+plt.hist(heights, bins=4, color='skyblue', edgecolor='black') 
+plt.title("Histogram of Heights") 
+plt.xlabel("Height (cm)") 
+plt.ylabel("Frequency") 
+plt.show() 
+ 
+#  Box plot 
+plt.figure(figsize=(6,4)) 
+plt.boxplot([heights, weights], labels=['Height', 'Weight']) 
+plt.title("Box Plot of Height and Weight") 
+plt.show() 
+ 
+#  Bar chart 
+plt.figure(figsize=(6,4)) 
+plt.bar(names, weights, color='orange') 
+plt.title("Bar Chart of Weights") 
+plt.xlabel("Instances") 
+plt.ylabel("Weight (kg)") 
+plt.show() 
+
+# Pie chart 
+plt.figure(figsize=(6,6)) 
+plt.pie(weights, labels=names, autopct='%1.1f%%', startangle=90, colors=['red','green','blue','yellow']) 
+plt.title("Pie Chart of Weights") 
+plt.show()
+
+Description:
+
+1. Histogram: A histogram displays the frequency distribution of continuous data by dividing values into intervals (bins).
+2. Box Plot: A box plot shows the summary of data through quartiles, highlighting the median, spread, and outliers.
+3. Bar Chart: A bar chart represents categorical data using rectangular bars with lengths proportional to their values.
+4. Pie Chart: A pie chart shows data as slices of a circle, representing the proportion of each category in a whole.
+5. Scatter Plot: A scatter plot uses points to show the relationship or correlation between two numerical variables.
