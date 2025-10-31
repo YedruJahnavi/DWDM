@@ -1,0 +1,66 @@
+13. Write a R program to cluster your choice of data using simple k-means algorithm using  JDK 
+ 
+# Load dataset 
+data(iris) 
+print("First few records of Iris dataset:") 
+head(iris) 
+ 
+# Use only numeric columns for clustering 
+iris_data <- iris[, 1:4] 
+ 
+# Scale the data 
+iris_scaled <- scale(iris_data) 
+ 
+# Apply K-Means algorithm 
+set.seed(123)  # for reproducibility 
+kmeans_result <- kmeans(iris_scaled, centers = 3, nstart = 20) 
+ 
+# Print the clustering results 
+print("Cluster centers:") 
+print(kmeans_result$centers) 
+ 
+print("Cluster assignments for first 10 rows:") 
+print(kmeans_result$cluster[1:10]) 
+ 
+# Add cluster results to the original data 
+iris$Cluster <- as.factor(kmeans_result$cluster) 
+ 
+# Compare with actual species 
+table(iris$Cluster, iris$Species) 
+ 
+# Visualize the clusters 
+library(ggplot2) 
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Cluster)) + 
+  geom_point(size = 3) + 
+  labs(title = "K-Means Clustering on Iris Dataset", 
+       x = "Sepal Length", 
+       y = "Sepal Width") + 
+  theme_minimal() 
+ 
+ 
+ 
+Output: 
+[1] "First few records of Iris dataset:" 
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species 
+1          5.1         3.5          1.4         0.2  setosa 
+2          4.9         3.0          1.4         0.2  setosa 
+3          4.7         3.2          1.3         0.2  setosa 
+4          4.6         3.1          1.5         0.2  setosa 
+5          5.0         3.6          1.4         0.2  setosa 
+6          5.4         3.9          1.7         0.4  setosa 
+ 
+[1] "Cluster centers:" 
+  Sepal.Length Sepal.Width Petal.Length Petal.Width 
+1   -0.05350354  -0.6040913   0.5509456   0.5775934 
+2    1.01560199   0.1022450   0.8932937   0.8179549 
+3   -1.28872844   0.5949606  -1.3004959  -1.2263398 
+ 
+[1] "Cluster assignments for first 10 rows:" 
+ [1] 3 3 3 3 3 3 3 3 3 3 
+ 
+> table(iris$Cluster, iris$Species) 
+         
+         setosa versicolor virginica 
+  1          0         48        14 
+  2          0          2        36 
+  3         50          0         0
